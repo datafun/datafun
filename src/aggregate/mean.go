@@ -30,5 +30,5 @@ func main() {
 		count += 1
 	})
 
-	fmt.Fprintf(fout, "%g", (sum / count))
+	fmt.Fprintf(fout, "%g\n", (sum / count))
 }

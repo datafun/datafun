@@ -24,6 +24,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Fprintf(fout, "%g", math.Abs(val))
+		fmt.Fprintf(fout, "%g\n", math.Abs(val))
 	})	
 }
