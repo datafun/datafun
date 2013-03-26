@@ -7,7 +7,7 @@ import (
 )
 
 func Init() *commander.Commander {
-	return commander.Init("0.0.0")
+	return commander.Init(Version)
 }
 
 func AddInputOutputOptions(commander *commander.Commander) {
