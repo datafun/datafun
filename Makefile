@@ -6,7 +6,7 @@ CMD=mkdir -p ./bin/$(GOOS)_$(GOARCH) && $(GO) $(ARGS)
 
 
 
-all: aggregate 
+all: aggregate filter map
 
 
 ### aggregate
@@ -17,10 +17,16 @@ sum:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
 
 
+###filter
+filter: nhead
+nhead:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/filter/$@.go
+
+
 ### map
 map: abs
 abs:
-	$(CC) $(SRC) src/map/$@.c $(CARGS) $(INCLUDE) -o ./bin/$@
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 
 
 
