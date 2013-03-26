@@ -16,9 +16,12 @@ func main() {
 	datafun.AddInputOutputOptions(program)
 	program.Parse()
 
+	fin := program.Opts["input"].Value.(*os.File)
+	fout := program.Opts["output"].Value.(*os.File)
+
 	var sum = 0.0
 
-	readline.ReadLine(program.Opts["input"].Value.(*os.File), func(line string) {
+	readline.ReadLine(fin, func(line string) {
 		val, err := strconv.ParseFloat(line, 64)
 		if err != nil {
 			log.Fatal(err)
@@ -26,5 +29,5 @@ func main() {
 		sum += val
 	})
 
-	fmt.Fprintf(program.Opts["output"].Value.(*os.File), "%g\n", sum)
+	fmt.Fprintf(fout, "%g\n", sum)
 }
