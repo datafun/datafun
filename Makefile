@@ -6,7 +6,7 @@ CMD=mkdir -p ./bin/$(GOOS)_$(GOARCH) && $(GO) $(ARGS)
 
 
 
-all: aggregate filter map
+all: aggregate filter map util
 
 
 ### aggregate
@@ -29,6 +29,10 @@ abs:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 
 
+### util
+util: splitlines
+splitlines:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/util/$@.go
 
 
 
