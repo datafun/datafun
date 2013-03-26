@@ -16,7 +16,6 @@ aggregate: mean sum
 mean:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
 
-
 sum:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
 
