@@ -10,11 +10,14 @@ all: aggregate filter map util
 
 
 ### aggregate
-aggregate: mean sum
+aggregate: mean product sum
 mean:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
+product:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
 sum:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
+
 
 
 ###filter
