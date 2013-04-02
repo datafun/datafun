@@ -27,8 +27,10 @@ nhead:
 
 
 ### map
-map: abs
+map: abs inv
 abs:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
+inv:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 
 

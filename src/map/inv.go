@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/datafun/datafun"
-	"math"
 )
 
 type Accumulator struct {
@@ -27,7 +26,7 @@ func main() {
 
 	each := func (num float64, acc interface{}) {
 		val := acc.(*Accumulator)
-		val.current = math.Abs(num)
+		val.current = 1.0 / num
 	}
 
 	datafun.ProcessEach(program, create, output, each)

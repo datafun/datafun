@@ -206,4 +206,24 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 }
 
 
+func SetupAggregateDef(program *commander.Commander) {
+	AddInputOutputOptions(program)
+	AddHorizontalOption(program)
+	AddChunkOption(program)
+}
+
+func SetupMapDef(program *commander.Commander) {
+	AddInputOutputOptions(program)
+	AddHorizontalOption(program)
+	AddChunkOption(program)
+
+	//don't show on --help
+	program.Opts["horizontal"].Hidden = true
+	program.Opts["chunk"].Hidden = true
+
+	//force ProcessEach to iterate and output at every element
+	os.Args = append(os.Args, "-x", "-c", "1")
+}
+
+
 
