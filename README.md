@@ -35,7 +35,7 @@ Command Docs
 
 ### Map
 
-[abs][abs], [inv][inv]
+[abs][abs], [inv][inv], [scale][scale]
 
 
 See [docs/index.md](https://github.com/datafun/datafun/blob/master/docs/index.md)
@@ -65,6 +65,7 @@ Copyright (c) 2013 JP Richardson
 <!-- map -->
 [abs]: https://github.com/data/datafun/blob/master/docs/map/abs.md
 [inv]: https://github.com/data/datafun/blob/master/docs/map/inv.md
+[scale]: https://github.com/data/datafun/blob/master/docs/map/scale.md
 
 <!-- search -->
 [max]: https://github.com/data/datafun/blob/master/docs/search/max.md

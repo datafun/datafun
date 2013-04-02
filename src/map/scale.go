@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"github.com/datafun/datafun"
 )
 
@@ -13,7 +14,10 @@ func main() {
 	program := datafun.Init()
 	datafun.SetupMapDef(program)
 	
+	program.Option("-n, --number <num>", "the number to scale by")
 	program.Parse()
+
+	scale, _ := strconv.ParseFloat(program.Opts["number"].StringValue, 64)
 
 	create := func () interface{} {
 		return new(Accumulator)
@@ -26,7 +30,7 @@ func main() {
 
 	each := func (num float64, acc interface{}) {
 		val := acc.(*Accumulator)
-		val.current = 1.0 / num
+		val.current = num * scale
 	}
 
 	datafun.ProcessEach(program, create, output, each)

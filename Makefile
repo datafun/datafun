@@ -32,6 +32,8 @@ abs:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 inv:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
+scale:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 
 
 ### util

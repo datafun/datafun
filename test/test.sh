@@ -33,6 +33,7 @@ test/aggregate/sum.test.sh
 test_module_start "map"
 test/map/abs.test.sh
 test/map/inv.test.sh
+test/map/scale.test.sh
 
 #search
 #test/search/max.test.sh
