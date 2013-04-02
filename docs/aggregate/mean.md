@@ -40,7 +40,7 @@ outputs...
 
 The mean of the column.
 
-i.e. (1*5*9*13)/4, (2,6,10,14)/4, etc
+i.e. (1+5+9+13)/4, (2+6+10+14)/4, etc
 
     mean << EOF
     1,2,3,4
@@ -59,7 +59,7 @@ outputs...
 
 The mean of the row.
 
-i.e. (1*2*3*4)/4, (5,6,7,8)/4, etc
+i.e. (1+2+3+4)/4, (5+6+7+8)/4, etc
 
     mean -x << EOF
     1,2,3,4
