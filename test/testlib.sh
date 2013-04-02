@@ -1,7 +1,11 @@
 COLOR_CYAN="\x1B[36m"
 COLOR_RED="\x1B[31m"
 COLOR_GREEN="\x1B[32m"
+COLOR_MAGENTA="\x1B[35m"
 COLOR_NORMAL="\x1B[39m"
+
+STYLE_BOLD_START="\x1B[1m"
+STYLE_BOLD_END="\x1B[22m"
 
 function assert_empty() {
 	if [ -z "$1" ]
@@ -13,6 +17,11 @@ function assert_empty() {
 		printf "$1\n"
 		#FAIL=`expr $FAIL + 1`
 	fi
+}
+
+function test_module_start() {
+	local MOD=$1
+	printf "\n${STYLE_BOLD_START}${COLOR_MAGENTA}$1${COLOR_NORMAL}${STYLE_BOLD_END}\n"
 }
 
 function test_file_start() {

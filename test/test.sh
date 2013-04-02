@@ -17,7 +17,7 @@ mkdir -p /tmp/test-datafun
 # TESTS
 ##########
 
-#aggregate
+test_module_start "aggregate"
 test/aggregate/mean.test.sh
 #test/aggregate/mode.test.sh
 test/aggregate/product.test.sh
@@ -29,14 +29,15 @@ test/aggregate/sum.test.sh
 #test/reduce/lt.test.sh
 #test/reduce/lte.test.sh
 
-#map
+
+test_module_start "map"
 test/map/abs.test.sh
 
 #search
 #test/search/max.test.sh
 #test/search/min.test.sh
 
-#util
+test_module_start "util"
 test/util/splitlines.test.sh
 
 
