@@ -30,7 +30,7 @@ You need Go installed. I'll eventually provide cross-platform binaries.
 Command Docs
 ------------
 
-See [docs/index.md](https://github.com/jprichardson/datafun/blob/master/docs/index.md)
+See [docs/index.md](https://github.com/datafun/datafun/blob/master/docs/index.md)
 
 
 
