@@ -2,32 +2,37 @@ package main
 
 import (
 	"fmt"
-	//"github.com/jprichardson/commander-go"
-	"github.com/jprichardson/readline-go"
 	"github.com/datafun/datafun"
-	"log"
-	"os"
-	"strconv"
 )
 
+type Accumulator struct {
+	sum float64
+}
 
 func main() {
 	program := datafun.Init()
 	datafun.AddInputOutputOptions(program)
+	datafun.AddHorizontalOption(program)
+	datafun.AddChunkOption(program)
 	program.Parse()
 
-	fin := program.Opts["input"].Value.(*os.File)
-	fout := program.Opts["output"].Value.(*os.File)
+	create := func () interface{} {
+		acc := new(Accumulator)
+		acc.sum = 0.0
+		return acc
+	}
 
-	var sum = 0.0
+	output := func (acc interface{}) string {
+		val := acc.(*Accumulator)
+		return fmt.Sprintf("%g", val.sum)
+	}
 
-	readline.ReadLine(fin, func(line string) {
-		val, err := strconv.ParseFloat(line, 64)
-		if err != nil {
-			log.Fatal(err)
-		}
-		sum += val
-	})
+	each := func (num float64, acc interface{}) {
+		val := acc.(*Accumulator)
+		val.sum += num
+	}
 
-	fmt.Fprintf(fout, "%g\n", sum)
+	datafun.ProcessEach(program, create, output, each)
 }
+
+
