@@ -5,6 +5,7 @@ aggregate
 These commands compute a number or numbers from the entire input or chunks of the input.
 
 - [mean][mean]: Computes the mean.
+- [sum][sum]: Computes the sum.
 
 
 map
@@ -35,6 +36,7 @@ These commands search for a particular element determined by the program and inp
 
 <!-- aggregate -->
 [mean]: https://github.com/datafun/datafun/blob/master/docs/aggregate/mean.md
+[sum]: https://github.com/datafun/datafun/blob/master/docs/aggregate/sum.md
 
 <!-- search -->
 [max]: https://github.com/data/datafun/blob/master/docs/search/max.md
