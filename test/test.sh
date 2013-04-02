@@ -19,8 +19,8 @@ mkdir -p /tmp/test-datafun
 
 test_module_start "aggregate"
 test/aggregate/mean.test.sh
-#test/aggregate/mode.test.sh
 test/aggregate/product.test.sh
+test/aggregate/quotient.test.sh
 test/aggregate/sum.test.sh
 
 #filter

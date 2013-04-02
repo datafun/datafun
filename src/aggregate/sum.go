@@ -11,9 +11,7 @@ type Accumulator struct {
 
 func main() {
 	program := datafun.Init()
-	datafun.AddInputOutputOptions(program)
-	datafun.AddHorizontalOption(program)
-	datafun.AddChunkOption(program)
+	datafun.SetupAggregateDef(program)
 	program.Parse()
 
 	create := func () interface{} {

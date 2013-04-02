@@ -10,10 +10,12 @@ all: aggregate filter map util
 
 
 ### aggregate
-aggregate: mean product sum
+aggregate: mean product quotient sum
 mean:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
 product:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
+quotient:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go
 sum:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/aggregate/$@.go

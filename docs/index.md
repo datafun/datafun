@@ -6,6 +6,7 @@ These commands compute a number or numbers from the entire input or chunks of th
 
 - [mean][mean]: Computes the mean.
 - [product][product]: Computes the product.
+- [quotient][quotient]: Compute quotient from left-to-right or top-to-bottom.
 - [sum][sum]: Computes the sum.
 
 
@@ -48,6 +49,7 @@ These commands search for a particular element determined by the program and inp
 <!-- aggregate -->
 [mean]: https://github.com/datafun/datafun/blob/master/docs/aggregate/mean.md
 [product]: https://github.com/datafun/datafun/blob/master/docs/aggregate/product.md
+[quotient]: https://github.com/datafun/datafun/blob/master/docs/aggregate/quotient.md
 [sum]: https://github.com/datafun/datafun/blob/master/docs/aggregate/sum.md
 
 <!-- map -->

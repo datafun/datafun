@@ -30,7 +30,7 @@ Command Docs
 ------------
 
 ### Aggregate
-[mean][mean], [product][product], [sum][sum]
+[mean][mean], [product][product], [quotient][quotient], [sum][sum]
 
 
 ### Map
@@ -60,6 +60,7 @@ Copyright (c) 2013 JP Richardson
 <!-- aggregate -->
 [mean]: https://github.com/datafun/datafun/blob/master/docs/aggregate/mean.md
 [product]: https://github.com/datafun/datafun/blob/master/docs/aggregate/product.md
+[quotient]: https://github.com/datafun/datafun/blob/master/docs/aggregate/quotient.md
 [sum]: https://github.com/datafun/datafun/blob/master/docs/aggregate/sum.md
 
 <!-- map -->

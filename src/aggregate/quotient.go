@@ -6,7 +6,7 @@ import (
 )
 
 type Accumulator struct {
-	product float64
+	quotient float64
 }
 
 func main() {
@@ -16,18 +16,22 @@ func main() {
 
 	create := func () interface{} {
 		acc := new(Accumulator)
-		acc.product = 1.0
+		acc.quotient = 0.0
 		return acc
 	}
 
 	output := func (acc interface{}) string {
 		val := acc.(*Accumulator)
-		return fmt.Sprintf("%g", val.product)
+		return fmt.Sprintf("%g", val.quotient)
 	}
 
 	each := func (num float64, acc interface{}) {
 		val := acc.(*Accumulator)
-		val.product *= num
+		if val.quotient == 0 { //obviously can't be 0, so it's the beginning
+			val.quotient = num
+		} else {
+			val.quotient /= num
+		}
 	}
 
 	datafun.ProcessEach(program, create, output, each)
