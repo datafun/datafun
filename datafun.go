@@ -157,11 +157,11 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 		}
 		
 	} else { //going horizontal... across... by columns
-		acc := create()
-		count = 0 //here, we're counting columns instead of lines (rows)
-
-		outp := ""
 		for err == nil {
+			acc := create()
+			count = 0 //here, we're counting columns instead of lines (rows)
+			outp := ""
+
 			for i, _ := range records {
 				convertEach(records[i], acc)
 				count +=1 
@@ -185,13 +185,9 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 
 				outp = strings.TrimRight(outp, ",")
 				fmt.Fprintf(fout, "%s\n", outp)
-				outp = ""
-				count = 0
-				acc = create()
 			} else {
 				result := output(acc)
 				fmt.Fprintf(fout, "%s\n", result)
-				acc = create()
 			}
 
 			records, err = csvReader.Read()
