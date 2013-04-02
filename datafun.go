@@ -6,9 +6,9 @@ import (
 	"path"
 	"strconv"
 	"log"
-	//"encoding/csv"
+	"encoding/csv"
 	"github.com/jprichardson/commander-go"
-	"github.com/jprichardson/readline-go"
+	//"github.com/jprichardson/readline-go"
 )
 
 func Init() *commander.Commander {
@@ -93,30 +93,48 @@ func AddChunkOption(commander *commander.Commander) {
 func ProcessEach(commander *commander.Commander, create func() interface{}, output func(interface{}) string, reset func(interface{}), each func(float64, interface{})) {
 	AddInputOutputOptions(commander)
 	AddHorizontalOption(commander)
-	AddCsvOption(commander)
+	//AddCsvOption(commander)
 	AddChunkOption(commander)
 
 	fin := commander.Opts["input"].Value.(*os.File)
 	fout := commander.Opts["output"].Value.(*os.File)
-	//isHorizontal := commander.Opts["horizontal"].Value.(bool)
-	isCsv := commander.Opts["csv"].Value.(bool) 
+	isHorizontal := commander.Opts["horizontal"].Value.(bool)
 	//chunkLines, _ := strconv.ParseInt(commander.Opts["chunk"].StringValue, 10, 32)
 
-	if !isCsv {
-		acc := create()
-		readline.ReadLine(fin, func(line string) {
-			val, err := strconv.ParseFloat(line, 64)
-			if err != nil {
-				log.Fatal(err)
+	csvReader := csv.NewReader(fin)
+	records, err := csvReader.Read()
+
+	//fmt.Printf("HORIZONTAL: %v\n", isHorizontal)
+	//fmt.Printf("LEN: %d\n", len(records))
+	if !isHorizontal {
+		accs := make([]interface{}, csvReader.FieldsPerRecord)
+		for i, _ := range records {
+			accs[i] = create()
+		}
+		
+		for err == nil {
+			for i, _ := range records {
+				val, err := strconv.ParseFloat(records[i], 64)
+				if err != nil {
+					log.Fatal(err)
+				}
+				each(val, accs[i])
 			}
-			each(val, acc)
-		})
+			
+			records, err = csvReader.Read()
+		}
 
-		result := output(acc)
-		fmt.Fprintf(fout, "%s\n", result)
-	} else {
+		for i, _ := range accs {
+			result := output(accs[i])
+			if i < len(accs) - 1 {
+				fmt.Fprintf(fout, "%s%c", result, csvReader.Comma)
+			} else {
+				fmt.Fprintf(fout, "%s\n", result)
+			}
 
+		}
 	}
+
 }
 
 

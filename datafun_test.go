@@ -102,4 +102,17 @@ func TestAddChunkOption (*testing.T) {
 	t.EQ (program.Opts["chunk"].StringValue, "500")
 }
 
+func TestAddCsvOption (*testing.T) {
+	program := Init()
+	
+	AddCsvOption(program)
+
+	os.Args = []string{"program", "--csv"}
+	program.Parse()
+
+	val := program.Opts["csv"].Value.(bool)
+	t.T (val)
+}
+
+
 
