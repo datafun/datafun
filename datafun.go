@@ -6,6 +6,7 @@ import (
 	"path"
 	"strconv"
 	"log"
+	"strings"
 	"encoding/csv"
 	"github.com/jprichardson/commander-go"
 	//"github.com/jprichardson/readline-go"
@@ -155,17 +156,43 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 			outputResults()
 		}
 		
-	} else {
+	} else { //going horizontal... across... by columns
 		acc := create()
+		count = 0 //here, we're counting columns instead of lines (rows)
 
+		outp := ""
 		for err == nil {
 			for i, _ := range records {
 				convertEach(records[i], acc)
+				count +=1 
+
+				if (chunkCount > 0) {
+					if (count == chunkCount) {
+						result := output(acc)
+						outp += result + ","
+						count = 0
+						acc = create()
+					}
+				}
 			}
 
-			result := output(acc)
-			fmt.Fprintf(fout, "%s\n", result)
-			
+			if (chunkCount > 0) {
+				//left overs
+				if (count > 0) {
+					result := output(acc)
+					outp += result + ","
+				}
+
+				outp = strings.TrimRight(outp, ",")
+				fmt.Fprintf(fout, "%s\n", outp)
+				outp = ""
+				count = 0
+				acc = create()
+			} else {
+				result := output(acc)
+				fmt.Fprintf(fout, "%s\n", result)
+			}
+
 			records, err = csvReader.Read()
 		}
 	}

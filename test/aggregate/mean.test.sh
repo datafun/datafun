@@ -46,7 +46,7 @@ EOF)
 assert_empty $OUTPUT
 
 
-### TEST: csv chunked input
+### TEST: csv chunked vertical input
 
 test_start "mean" "-c 2" "test_mean.txt"
 
@@ -59,7 +59,7 @@ assert_empty $OUTPUT
 
 
 
-### TEST: csv chunked input with odd number of lines
+### TEST: csv chunked vertical input with odd number of chunks
 
 test_start "mean" "-c 3" "test_mean.txt"
 
@@ -69,6 +69,37 @@ OUTPUT=$(diff $RET -<<EOF
 EOF)
 
 assert_empty $OUTPUT
+
+
+
+### TEST: csv chunked horizontal input
+
+test_start "mean" "-c 2 -x" "test_mean.txt"
+
+OUTPUT=$(diff $RET -<<EOF
+1.5,3.5
+5.5,7.5
+9.5,11.5
+13.5,15.5
+EOF)
+
+assert_empty $OUTPUT
+
+
+
+### TEST: csv chunked horizontal input with odd number of chunks
+
+test_start "mean" "-c 3 -x" "test_mean.txt"
+
+OUTPUT=$(diff $RET -<<EOF
+2,4
+6,8
+10,12
+14,16
+EOF)
+
+assert_empty $OUTPUT
+
 
 
 
