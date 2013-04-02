@@ -2,7 +2,9 @@
 aggregate
 ---------
 
-These commands compute a number or numbers from the entire input.
+These commands compute a number or numbers from the entire input or chunks of the input.
+
+- [mean][mean]: Computes the mean.
 
 
 map
@@ -18,7 +20,7 @@ search
 
 These commands search for a particular element determined by the program and input conditions and only return one result.
 
-- [max][max]: Computes the maximum number from the input.
+- [max][max]: Computes the maximum number.
 
 
 
@@ -31,5 +33,8 @@ These commands search for a particular element determined by the program and inp
 
 
 
+<!-- aggregate -->
+[mean]: https://github.com/datafun/datafun/blob/master/docs/aggregate/mean.md
 
-[max]: https://github.com/jprichardson/datafun/blob/master/docs/search/max.md
+<!-- search -->
+[max]: https://github.com/data/datafun/blob/master/docs/search/max.md
