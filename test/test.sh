@@ -34,6 +34,7 @@ test_module_start "map"
 test/map/abs.test.sh
 test/map/inv.test.sh
 test/map/scale.test.sh
+test/map/shift.test.sh
 
 #search
 #test/search/max.test.sh

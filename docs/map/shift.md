@@ -1,31 +1,31 @@
-datafun: scale
+datafun: shift
 =============
 
-Scale by a scaling factor.
+Shift the data set by a value.
 
 
 
 Usage
 -----
 
-    Usage: scale [options]
+    Usage: shift [options]
 
     Options:
       -h, --help             display usage
       -v, --version          display version
       -i, --input <file>     input file, defaults to stdin
       -o, --output <file>    output file, defaults to stdout
-      -n, --number <num>     the number to scale by
+      -n, --number <num>     the number to shift by
 
 
 Example
 -------
 
-### 1 Scale the dataset
+### 1 Shift the dataset
 
-Shrink data points by 50%
+Shift the data to the left 2
 
-    scale -n 0.5 << EOF
+    scale -n -2 << EOF
     1,2,3,4
     5,6,7,8
     9,10,11,12
@@ -34,10 +34,10 @@ Shrink data points by 50%
 
 outputs...
 
-    0.5,1,1.5,2
-    2.5,3,3.5,4
-    4.5,5,5.5,6
-    6.5,7,7.5,8
+   -1,0,1,2
+    3,4,5,6
+    7,8,9,10
+    11,12,13,14
 
 
 

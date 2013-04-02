@@ -18,6 +18,7 @@ These commands iterate over ever element and apply the function to said element.
 - [abs][abs]: Compute the absolute value.
 - [inv][inv]: Compute the inverse.
 - [scale][scale]: Scale the dataset by a scale factor.
+- [shift][shift]: Shift the data by a value.
 
 
 
@@ -53,6 +54,7 @@ These commands search for a particular element determined by the program and inp
 [abs]: https://github.com/data/datafun/blob/master/docs/map/abs.md
 [inv]: https://github.com/data/datafun/blob/master/docs/map/inv.md
 [scale]: https://github.com/data/datafun/blob/master/docs/map/scale.md
+[shift]: [scale]: https://github.com/data/datafun/blob/master/docs/map/shift.md
 
 <!-- search -->
 [max]: https://github.com/data/datafun/blob/master/docs/search/max.md

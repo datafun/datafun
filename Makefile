@@ -27,12 +27,14 @@ nhead:
 
 
 ### map
-map: abs inv
+map: abs inv scale shift
 abs:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 inv:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 scale:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
+shift:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 
 

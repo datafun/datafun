@@ -35,7 +35,7 @@ Command Docs
 
 ### Map
 
-[abs][abs], [inv][inv], [scale][scale]
+[abs][abs], [inv][inv], [scale][scale], [shift][shift]
 
 
 See [docs/index.md](https://github.com/datafun/datafun/blob/master/docs/index.md)
