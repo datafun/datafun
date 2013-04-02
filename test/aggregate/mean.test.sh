@@ -19,11 +19,11 @@ assert_empty $OUTPUT
 ### TEST: csv vertical input
 
 #setup data for next test
-DATA="1,2,3,4\n5,6,7,8\n9,10,11,12\n13,14,15,16"
-TEST_FILE="$(pwd)/test/resources/test_mean.txt"
-printf $DATA > $TEST_FILE
+#DATA="1,2,3,4\n5,6,7,8\n9,10,11,12\n13,14,15,16"
+#TEST_FILE="$(pwd)/test/resources/test_mean.txt"
+#printf $DATA > $TEST_FILE
 
-test_start "mean" "" "test_mean.txt"
+test_start "mean" "" "clean-data.txt"
 
 OUTPUT=$(diff $RET -<<EOF
 7,8,9,10
@@ -34,7 +34,7 @@ assert_empty $OUTPUT
 
 ### TEST: csv horizontal input
 
-test_start "mean" "-x" "test_mean.txt"
+test_start "mean" "-x" "clean-data.txt"
 
 OUTPUT=$(diff $RET -<<EOF
 2.5
@@ -48,7 +48,7 @@ assert_empty $OUTPUT
 
 ### TEST: csv chunked vertical input
 
-test_start "mean" "-c 2" "test_mean.txt"
+test_start "mean" "-c 2" "clean-data.txt"
 
 OUTPUT=$(diff $RET -<<EOF
 3,4,5,6
@@ -61,7 +61,7 @@ assert_empty $OUTPUT
 
 ### TEST: csv chunked vertical input with odd number of chunks
 
-test_start "mean" "-c 3" "test_mean.txt"
+test_start "mean" "-c 3" "clean-data.txt"
 
 OUTPUT=$(diff $RET -<<EOF
 5,6,7,8
@@ -74,7 +74,7 @@ assert_empty $OUTPUT
 
 ### TEST: csv chunked horizontal input
 
-test_start "mean" "-c 2 -x" "test_mean.txt"
+test_start "mean" "-c 2 -x" "clean-data.txt"
 
 OUTPUT=$(diff $RET -<<EOF
 1.5,3.5
@@ -89,7 +89,7 @@ assert_empty $OUTPUT
 
 ### TEST: csv chunked horizontal input with odd number of chunks
 
-test_start "mean" "-c 3 -x" "test_mean.txt"
+test_start "mean" "-c 3 -x" "clean-data.txt"
 
 OUTPUT=$(diff $RET -<<EOF
 2,4
@@ -101,9 +101,7 @@ EOF)
 assert_empty $OUTPUT
 
 
-
-
-rm $TEST_FILE
+#rm $TEST_FILE
 
 
 
