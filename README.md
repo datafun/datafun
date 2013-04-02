@@ -29,6 +29,15 @@ You need Go installed. I'll eventually provide cross-platform binaries.
 Command Docs
 ------------
 
+### Aggregate
+[mean][mean], [product][product], [sum][sum]
+
+
+### Map
+
+[abs][abs]
+
+
 See [docs/index.md](https://github.com/datafun/datafun/blob/master/docs/index.md)
 
 
@@ -47,3 +56,14 @@ License (New BSD)
 
 Copyright (c) 2013 JP Richardson
 
+
+<!-- aggregate -->
+[mean]: https://github.com/datafun/datafun/blob/master/docs/aggregate/mean.md
+[product]: https://github.com/datafun/datafun/blob/master/docs/aggregate/product.md
+[sum]: https://github.com/datafun/datafun/blob/master/docs/aggregate/sum.md
+
+<!-- map -->
+[abs]: https://github.com/data/datafun/blob/master/docs/map/abs.md
+
+<!-- search -->
+[max]: https://github.com/data/datafun/blob/master/docs/search/max.md
