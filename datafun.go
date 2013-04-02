@@ -4,7 +4,11 @@ import (
 	"os"
 	"fmt"
 	"path"
+	"strconv"
+	"log"
+	//"encoding/csv"
 	"github.com/jprichardson/commander-go"
+	"github.com/jprichardson/readline-go"
 )
 
 func Init() *commander.Commander {
@@ -63,7 +67,7 @@ func AddHorizontalOption(commander *commander.Commander) {
 }
 
 func AddCsvOption(commander *commander.Commander) {
-	commander.Option("-c, --csv", "specify CSV input, triggered by default if input filename ends in .csv")
+	commander.Option("--csv", "specify CSV input, triggered by default if input filename ends in .csv")
 
 	option := commander.Opts["csv"]
 	option.Value = false
@@ -71,4 +75,49 @@ func AddCsvOption(commander *commander.Commander) {
 		option.Value = true
 	}
 }
+
+func AddChunkOption(commander *commander.Commander) {
+	commander.Option("-c, --chunk <number>", "chunk the input to treat as multiple separate input files with <number> of lines")
+	option := commander.Opts["chunk"]
+	option.Value = false
+	option.Callback = func(args ...string) {
+		if len(args) < 1 {
+			fmt.Fprintf(os.Stderr, "Must specify a parameter for -c or --chunk"); return;
+		}
+		option.Value = args[0]
+		option.StringValue = args[0]
+	}
+}
+
+
+func ProcessEach(commander *commander.Commander, create func() interface{}, output func(interface{}) string, reset func(interface{}), each func(float64, interface{})) {
+	AddInputOutputOptions(commander)
+	AddHorizontalOption(commander)
+	AddCsvOption(commander)
+	AddChunkOption(commander)
+
+	fin := commander.Opts["input"].Value.(*os.File)
+	fout := commander.Opts["output"].Value.(*os.File)
+	//isHorizontal := commander.Opts["horizontal"].Value.(bool)
+	isCsv := commander.Opts["csv"].Value.(bool) 
+	//chunkLines, _ := strconv.ParseInt(commander.Opts["chunk"].StringValue, 10, 32)
+
+	if !isCsv {
+		acc := create()
+		readline.ReadLine(fin, func(line string) {
+			val, err := strconv.ParseFloat(line, 64)
+			if err != nil {
+				log.Fatal(err)
+			}
+			each(val, acc)
+		})
+
+		result := output(acc)
+		fmt.Fprintf(fout, "%s\n", result)
+	} else {
+
+	}
+}
+
+
 

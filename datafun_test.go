@@ -91,4 +91,15 @@ func TestAddInputOutputOptionsOutputDefault (*testing.T) {
 	t.EQ (program.Opts["output"].Value, os.Stdout)
 }
 
+func TestAddChunkOption (*testing.T) {
+	program := Init()
+	
+	AddChunkOption(program)
+
+	os.Args = []string{"program", "-c", "500"}
+	program.Parse()
+
+	t.EQ (program.Opts["chunk"].StringValue, "500")
+}
+
 
