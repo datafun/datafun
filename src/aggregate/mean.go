@@ -9,35 +9,6 @@ import (
 	"github.com/datafun/datafun"
 )
 
-
-
-/*func main() {
-	program := datafun.Init()
-	datafun.AddInputOutputOptions(program)
-	datafun.AddChunkOption(program)
-	program.Parse()
-
-	sum := 0.0
-	count := 0.0
-
-	fin := program.Opts["input"].Value.(*os.File)
-	fout := program.Opts["output"].Value.(*os.File)
-
-	chunkLines, _ := strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 32)
-
-
-	readline.ReadLine(fin, func(line string) {
-		val, err := strconv.ParseFloat(line, 64)
-		if err != nil {
-			log.Fatal(err)
-		}
-		sum += val
-		count += 1
-	})
-
-	fmt.Fprintf(fout, "%g\n", (sum / count))
-}*/
-
 type Accumulator struct {
 	sum, count float64
 }
@@ -45,10 +16,9 @@ type Accumulator struct {
 
 func main() {
 	program := datafun.Init()
-	/*datafun.AddInputOutputOptions(program)
+	datafun.AddInputOutputOptions(program)
 	datafun.AddHorizontalOption(program)
-	datafun.AddCsvOption(program)
-	datafun.AddChunkOption(program)*/
+	datafun.AddChunkOption(program)
 	program.Parse()
 
 	//sum := 0.0

@@ -90,21 +90,17 @@ func AddChunkOption(commander *commander.Commander) {
 }
 
 
-func ProcessEach(commander *commander.Commander, create func() interface{}, output func(interface{}) string, reset func(interface{}), each func(float64, interface{})) {
-	AddInputOutputOptions(commander)
-	AddHorizontalOption(commander)
-	//AddCsvOption(commander)
-	AddChunkOption(commander)
-
-	fin := commander.Opts["input"].Value.(*os.File)
-	fout := commander.Opts["output"].Value.(*os.File)
-	isHorizontal := commander.Opts["horizontal"].Value.(bool)
-	//chunkLines, _ := strconv.ParseInt(commander.Opts["chunk"].StringValue, 10, 32)
+func ProcessEach(program *commander.Commander, create func() interface{}, output func(interface{}) string, reset func(interface{}), each func(float64, interface{})) {
+	fin := program.Opts["input"].Value.(*os.File)
+	fout := program.Opts["output"].Value.(*os.File)
+	isHorizontal := program.Opts["horizontal"].Value.(bool)
+	//chunkLines, _ := strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 32)
 
 	csvReader := csv.NewReader(fin)
 	records, err := csvReader.Read()
 
-	//fmt.Printf("HORIZONTAL: %v\n", isHorizontal)
+	//fmt.Printf("ARGS: %#v", os.Args)
+	//fmt.Printf("HORIZONTAL: %#v\n", program.Opts["horizontal"])
 	//fmt.Printf("LEN: %d\n", len(records))
 	if !isHorizontal {
 		accs := make([]interface{}, csvReader.FieldsPerRecord)
@@ -132,6 +128,23 @@ func ProcessEach(commander *commander.Commander, create func() interface{}, outp
 				fmt.Fprintf(fout, "%s\n", result)
 			}
 
+		}
+	} else {
+		acc := create()
+
+		for err == nil {
+			for i, _ := range records {
+				val, err := strconv.ParseFloat(records[i], 64)
+				if err != nil {
+					log.Fatal(err)
+				}
+				each(val, acc)
+			}
+
+			result := output(acc)
+			fmt.Fprintf(fout, "%s\n", result)
+			
+			records, err = csvReader.Read()
 		}
 	}
 
