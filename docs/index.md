@@ -13,6 +13,12 @@ These commands compute a number or numbers from the entire input or chunks of th
 map
 ---
 
+These commands iterate over ever element and apply the function to said element.
+
+- [abs][abs]: Compute the absolute value.
+
+
+
 
 filter
 ------
@@ -40,6 +46,9 @@ These commands search for a particular element determined by the program and inp
 [mean]: https://github.com/datafun/datafun/blob/master/docs/aggregate/mean.md
 [product]: https://github.com/datafun/datafun/blob/master/docs/aggregate/product.md
 [sum]: https://github.com/datafun/datafun/blob/master/docs/aggregate/sum.md
+
+<!-- map -->
+[abs]: https://github.com/data/datafun/blob/master/docs/map/abs.md
 
 <!-- search -->
 [max]: https://github.com/data/datafun/blob/master/docs/search/max.md

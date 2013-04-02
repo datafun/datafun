@@ -94,8 +94,17 @@ func AddChunkOption(commander *commander.Commander) {
 func ProcessEach(program *commander.Commander, create func() interface{}, output func(interface{}) string, each func(float64, interface{})) {
 	fin := program.Opts["input"].Value.(*os.File)
 	fout := program.Opts["output"].Value.(*os.File)
-	isHorizontal := program.Opts["horizontal"].Value.(bool)
-	chunkCount, _ := strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 64)
+
+	isHorizontal := false
+	var chunkCount  int64 = 0
+
+	if program.Opts["horizontal"] != nil {
+		isHorizontal = program.Opts["horizontal"].Value.(bool)
+	}
+
+	if program.Opts["chunk"] != nil {
+		chunkCount, _ = strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 64)
+	}
 
 	csvReader := csv.NewReader(fin)
 	records, err := csvReader.Read()
