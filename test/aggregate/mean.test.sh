@@ -38,9 +38,9 @@ test_start "mean" "-x" "clean-data.txt"
 
 OUTPUT=$(diff $RET -<<EOF
 2.5
-4.5
 6.5
-8.5
+10.5
+14.5
 EOF)
 
 assert_empty $OUTPUT

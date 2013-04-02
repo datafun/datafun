@@ -78,7 +78,7 @@ func AddCsvOption(commander *commander.Commander) {
 }
 
 func AddChunkOption(commander *commander.Commander) {
-	commander.Option("-c, --chunk <number>", "chunk the input to treat as multiple separate input files with <number> of lines")
+	commander.Option("-c, --chunk <number>", "chunk the input to treat as multiple separate input files with <number> of chunks")
 	option := commander.Opts["chunk"]
 	option.Value = false
 	option.Callback = func(args ...string) {
@@ -191,6 +191,7 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 			} else {
 				result := output(acc)
 				fmt.Fprintf(fout, "%s\n", result)
+				acc = create()
 			}
 
 			records, err = csvReader.Read()
