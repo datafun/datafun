@@ -16,8 +16,8 @@ func Init() *commander.Commander {
 }
 
 func AddInputOutputOptions(commander *commander.Commander) {
-	commander.Option("-i, --input [file]", "input file, defaults to stdin")
-	commander.Option("-o, --output [file]", "output file, defaults to stdout")
+	commander.Option("-i, --input <file>", "input file, defaults to stdin")
+	commander.Option("-o, --output <file>", "output file, defaults to stdout")
 
 	inputOption := commander.Opts["input"]
 	inputOption.Value = os.Stdin; //default
@@ -94,11 +94,19 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 	fin := program.Opts["input"].Value.(*os.File)
 	fout := program.Opts["output"].Value.(*os.File)
 	isHorizontal := program.Opts["horizontal"].Value.(bool)
-	chunkLines, _ := strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 64)
+	chunkCount, _ := strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 64)
 
 	csvReader := csv.NewReader(fin)
 	records, err := csvReader.Read()
-	var lineCount int64 = 1 
+	var count int64 = 1 
+
+	convertEach := func (str string, acc interface{}) {
+		val, err := strconv.ParseFloat(str, 64)
+		if err != nil {
+			log.Fatal(err)
+		}
+		each(val, acc)
+	}
 
 	//fmt.Printf("ARGS: %#v", os.Args)
 	//fmt.Printf("HORIZONTAL: %#v\n", program.Opts["horizontal"])
@@ -126,28 +134,24 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 		
 		for err == nil {
 			for i, _ := range records {
-				val, err := strconv.ParseFloat(records[i], 64)
-				if err != nil {
-					log.Fatal(err)
-				}
-				each(val, accs[i])
+				convertEach(records[i], accs[i])
 			}
 
-			if (chunkLines > 0) {
-				if (lineCount == chunkLines) {
+			if (chunkCount > 0) {
+				if (count == chunkCount) {
 					outputResults()
 					initArr()
-					lineCount = 0
+					count = 0
 				}
 			}
 			
 			records, err = csvReader.Read()
 			if err == nil {
-				lineCount += 1
+				count += 1
 			}
 		}
 
-		if lineCount > 0 { //output leftovers
+		if count > 0 { //output leftovers
 			outputResults()
 		}
 		
@@ -156,11 +160,7 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 
 		for err == nil {
 			for i, _ := range records {
-				val, err := strconv.ParseFloat(records[i], 64)
-				if err != nil {
-					log.Fatal(err)
-				}
-				each(val, acc)
+				convertEach(records[i], acc)
 			}
 
 			result := output(acc)
