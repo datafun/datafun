@@ -46,6 +46,32 @@ EOF)
 assert_empty $OUTPUT
 
 
+### TEST: csv chunked input
+
+test_start "mean" "-c 2" "test_mean.txt"
+
+OUTPUT=$(diff $RET -<<EOF
+3,4,5,6
+11,12,13,14
+EOF)
+
+assert_empty $OUTPUT
+
+
+
+### TEST: csv chunked input with odd number of lines
+
+test_start "mean" "-c 3" "test_mean.txt"
+
+OUTPUT=$(diff $RET -<<EOF
+5,6,7,8
+13,14,15,16
+EOF)
+
+assert_empty $OUTPUT
+
+
+
 rm $TEST_FILE
 
 

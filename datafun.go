@@ -90,22 +90,38 @@ func AddChunkOption(commander *commander.Commander) {
 }
 
 
-func ProcessEach(program *commander.Commander, create func() interface{}, output func(interface{}) string, reset func(interface{}), each func(float64, interface{})) {
+func ProcessEach(program *commander.Commander, create func() interface{}, output func(interface{}) string, each func(float64, interface{})) {
 	fin := program.Opts["input"].Value.(*os.File)
 	fout := program.Opts["output"].Value.(*os.File)
 	isHorizontal := program.Opts["horizontal"].Value.(bool)
-	//chunkLines, _ := strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 32)
+	chunkLines, _ := strconv.ParseInt(program.Opts["chunk"].StringValue, 10, 64)
 
 	csvReader := csv.NewReader(fin)
 	records, err := csvReader.Read()
+	var lineCount int64 = 1 
 
 	//fmt.Printf("ARGS: %#v", os.Args)
 	//fmt.Printf("HORIZONTAL: %#v\n", program.Opts["horizontal"])
 	//fmt.Printf("LEN: %d\n", len(records))
 	if !isHorizontal {
 		accs := make([]interface{}, csvReader.FieldsPerRecord)
-		for i, _ := range records {
-			accs[i] = create()
+		
+		initArr := func () {
+			for i, _ := range records {
+				accs[i] = create()
+			}
+		}
+		initArr() //initialize empty array
+
+		outputResults := func () {
+			for i, _ := range accs {
+				result := output(accs[i])
+				if i < len(accs) - 1 {
+					fmt.Fprintf(fout, "%s%c", result, csvReader.Comma)
+				} else {
+					fmt.Fprintf(fout, "%s\n", result)
+				}
+			}
 		}
 		
 		for err == nil {
@@ -116,19 +132,25 @@ func ProcessEach(program *commander.Commander, create func() interface{}, output
 				}
 				each(val, accs[i])
 			}
+
+			if (chunkLines > 0) {
+				if (lineCount == chunkLines) {
+					outputResults()
+					initArr()
+					lineCount = 0
+				}
+			}
 			
 			records, err = csvReader.Read()
-		}
-
-		for i, _ := range accs {
-			result := output(accs[i])
-			if i < len(accs) - 1 {
-				fmt.Fprintf(fout, "%s%c", result, csvReader.Comma)
-			} else {
-				fmt.Fprintf(fout, "%s\n", result)
+			if err == nil {
+				lineCount += 1
 			}
-
 		}
+
+		if lineCount > 0 { //output leftovers
+			outputResults()
+		}
+		
 	} else {
 		acc := create()
 
