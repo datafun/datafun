@@ -36,12 +36,8 @@ func main() {
 			step := (num - lastNum) / (n + 1)
 
 			for i := base; i < num; i += step {
-				//fmt.Printf("base: %g, lastnum: %g, num: %g, n: %g, i: %g\n", base, lastNum, num, n, i)
 				fmt.Fprintf(fout, "%g\n", i)
 			}
-
-			//fmt.Fprintf(fout, "%g\n", num)
-			lastNum = num
 		}
 
 		count += 1 
