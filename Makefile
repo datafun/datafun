@@ -6,7 +6,7 @@ CMD=mkdir -p ./bin/$(GOOS)_$(GOARCH) && $(GO) $(ARGS)
 
 
 
-all: aggregate filter map util
+all: aggregate filter map interpolate util
 
 
 ### aggregate
@@ -38,6 +38,12 @@ scale:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
 shift:
 	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/map/$@.go
+
+
+### interpolate
+interpolate: interplin
+interplin:
+	$(CMD) -o ./bin/$(GOOS)_$(GOARCH)/$@ src/interpolate/$@.go
 
 
 ### util

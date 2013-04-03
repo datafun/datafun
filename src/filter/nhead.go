@@ -18,8 +18,6 @@ func main() {
 
 	fin := program.Opts["input"].Value.(*os.File)
 	fout := program.Opts["output"].Value.(*os.File)
-	
-	program.Parse()
 
 	max, _ := strconv.ParseInt(program.Opts["number"].StringValue, 10, 64)
 	var count int64 = 0

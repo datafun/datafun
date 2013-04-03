@@ -29,12 +29,15 @@ You need Go installed. I'll eventually provide cross-platform binaries.
 Command Docs
 ------------
 
-### Aggregate
+### aggregate
 [mean][mean], [product][product], [quotient][quotient], [sum][sum]
 
 
-### Map
+### interpolate
+[interplin][interplin]
 
+
+### map
 [abs][abs], [inv][inv], [scale][scale], [shift][shift]
 
 
@@ -62,6 +65,9 @@ Copyright (c) 2013 JP Richardson
 [product]: https://github.com/datafun/datafun/blob/master/docs/aggregate/product.md
 [quotient]: https://github.com/datafun/datafun/blob/master/docs/aggregate/quotient.md
 [sum]: https://github.com/datafun/datafun/blob/master/docs/aggregate/sum.md
+
+<!-- interpolate -->
+[interplin]: https://github.com/datafun/datafun/blob/master/docs/interpolate/interplin.md
 
 <!-- map -->
 [abs]: https://github.com/data/datafun/blob/master/docs/map/abs.md

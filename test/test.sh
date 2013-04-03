@@ -12,6 +12,7 @@ printf "\nTesting datafun...\n"
 rm -rf /tmp/test-datafun
 mkdir -p /tmp/test-datafun
 
+BASEDIR=`pwd`
 
 ##########
 # TESTS
@@ -28,6 +29,9 @@ test/aggregate/sum.test.sh
 #test/reduce/gte.test.sh
 #test/reduce/lt.test.sh
 #test/reduce/lte.test.sh
+
+test_module_start "interpolate"
+test/interpolate/interplin.test.sh
 
 
 test_module_start "map"

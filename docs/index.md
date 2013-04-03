@@ -28,6 +28,14 @@ filter
 ------
 
 
+interpolate
+-----------
+
+These commands perform interpolation methods on the input data. These methods are one-dimensional only.
+
+- [interplin][interplin]: Perform linear interpolation on a one-dimensional data set.
+
+
 search
 ------
 
@@ -52,6 +60,10 @@ These commands search for a particular element determined by the program and inp
 [quotient]: https://github.com/datafun/datafun/blob/master/docs/aggregate/quotient.md
 [sum]: https://github.com/datafun/datafun/blob/master/docs/aggregate/sum.md
 
+<!-- interpolate -->
+[interplin]: https://github.com/datafun/datafun/blob/master/docs/interpolate/interplin.md
+
+
 <!-- map -->
 [abs]: https://github.com/data/datafun/blob/master/docs/map/abs.md
 [inv]: https://github.com/data/datafun/blob/master/docs/map/inv.md
@@ -60,3 +72,5 @@ These commands search for a particular element determined by the program and inp
 
 <!-- search -->
 [max]: https://github.com/data/datafun/blob/master/docs/search/max.md
+
+
