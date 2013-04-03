@@ -54,6 +54,18 @@ Contributions
 
 
 
+Tests
+-----
+
+Since the tests are bash scripts, they've only ran on POSIX compatible systems such as Mac OS X and Linux. The presumption though is that the programs should work on Windows.
+
+
+To run the tests:
+
+    make test
+
+
+
 License (New BSD)
 ----------------
 
